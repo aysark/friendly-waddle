@@ -90,7 +90,7 @@ class App extends Component {
         <h1 className="ui inverted header">
           I Want Someone To Scream...
         </h1>
-        <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={this.state.placeholder} value={this.state.scream} onKeyPress={this.handleKeyPress.bind(this)}/>
+        <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={placeholder} value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
         <br/>
         <div className="ui huge primary button myButton" onClick={(e)=>this.submitForm()}>Go <i className="right arrow icon"></i></div>
       </div>
