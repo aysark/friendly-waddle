@@ -18,7 +18,7 @@ class App extends Component {
       response: '',
       scream:'',
       sidebarVisible: false,
-      page    
+      page
     }
 
     this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
@@ -127,7 +127,7 @@ class App extends Component {
 
     return (
       <Sidebar.Pushable >
-      <Sidebar as={Menu} animation='push' direction='top' visible={sidebarVisible} inverted>
+      <Sidebar as={Menu} animation='push' direction='top' visible={sidebarVisible} inverted size='large'>
         <Menu.Item name='home' onClick={ (e)=> {this.setState({page:'home'}); window.location.hash='home'} } className={ page==='home' ? 'active item': 'item' }>
           Home
         </Menu.Item>
@@ -137,6 +137,11 @@ class App extends Component {
         <Menu.Item name='About' onClick={ (e)=> {this.setState({page:'about'}); window.location.hash='about'} } className={ page==='about' ? 'active item': 'item' }>
           About Us
         </Menu.Item>
+        <Menu.Menu position='right'>
+          <Menu.Item name='signup'>
+           Sign Up
+         </Menu.Item>
+        </Menu.Menu>
       </Sidebar>
       <Sidebar.Pusher>
       <div className="App" style={{'background': 'url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
