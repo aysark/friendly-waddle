@@ -5,9 +5,13 @@ import StripeCheckout from 'react-stripe-checkout';
 
 
 let placeholders = [
-  'I Love Startup Weekend',
-  'Five dollars is a steal',
-  'Echo.Cash is the Best'
+  //'I Love Startup Weekend',
+  //'Five dollars is a steal',
+  //'Echo.Cash is the Best'
+  'Turtle',
+  'Refrigerator',
+  'Walrus',
+  'Backstreet Boy',
 ];
 
 class App extends Component {
@@ -110,7 +114,7 @@ class App extends Component {
         <h1 className="ui inverted header">
           I Want Someone To Scream...
         </h1>
-        <input className="myBox" onChange={(e)=> this.changeScream(e)} placeholder={ placeholder } value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
+        <input className="myBox" onChange={(e)=> this.changeScream(e)} placeholder={ 'I fucked a ' + placeholder + '...' } value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
         <br/>
         <StripeCheckout
           token={(e)=>this.onToken(e)}
