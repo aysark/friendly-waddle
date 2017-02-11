@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Icon, Label, Message, Header, Segment, Button } from 'semantic-ui-react'
+import { Container, Icon, Label, Message, Header, Segment, Button, Sidebar, Menu, Image } from 'semantic-ui-react'
 import './App.css';
 
 let placeholders = [
@@ -15,9 +15,13 @@ class App extends Component {
       placeholder: '',
       isFetching: false,
       response: '',
-      scream:''
+      scream:'',
+      sidebarVisible: false
     }
-  } 
+
+    this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
+  }
+
   componentWillMount(){
     let currentIndex = 0
     this.setState({placeholder: placeholders[currentIndex]});
@@ -34,10 +38,10 @@ class App extends Component {
     let oldText = this.state.placeholder,
         length = this.state.placeholder.length,
         newLength = newText.length;
-    let erase= (i)=>{ 
+    let erase= (i)=>{
       setTimeout(()=>{this.setState({placeholder:oldText.substring(0, length - i - 1)})}, i*40)
     }
-    let write= (i)=>{ 
+    let write= (i)=>{
       setTimeout(()=>{this.setState({placeholder:newText.substring(0, i)})}, (i*40+ length*40))
     }
     for(let i=0; i< length; i++){
@@ -65,61 +69,54 @@ class App extends Component {
 
   }
 
+  toggleSidebarVisibility() {
+    this.setState({
+      sidebarVisible: !this.state.sidebarVisible
+    });
+  }
 
   render() {
+    const visible = this.state.sidebarVisible;
 
     return (
-      <div className="App" style={{'background': 'linear-gradient(rgba(0, 40, 0, .6), rgba(0, 0, 0, .3)), url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover', 'minHeight': '100%' }}>
-        <div className="ui inverted vertical masthead center aligned segment" style={{'background': 'linear-gradient(rgba(0, 40, 0, .6), rgba(0, 0, 0, .3)), url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover'}}>
 
-            <div className="ui container">
-              <div className="ui large secondary inverted pointing menu">
-                <a className="toc item">
-                  <i className="sidebar icon"></i>
-                </a>
-                <a className="active item">Home</a>
-                <a className="item">FAQ</a>
-                <a className="item">About Us</a>
-                <a className="item">Careers</a>
-                <div className="right item">
-                  <a className="ui inverted button">Log in</a>
-                  <a className="ui inverted button">Sign Up</a>
+      <Sidebar.Pushable >
+      <Sidebar as={Menu} animation='push' direction='top' visible={visible} inverted>
+        <Menu.Item name='home'>
+          <a href="http://localhost:3000/">Home</a>
+        </Menu.Item>
+        <Menu.Item name='FAQ'>
+          FAQ
+        </Menu.Item>
+        <Menu.Item name='About'>
+          About
+        </Menu.Item>
+      </Sidebar>
+      <Sidebar.Pusher>
+        <div className="App" style={{'background': 'linear-gradient(rgba(0, 40, 0, .6), rgba(0, 0, 0, .3)), url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover', 'minHeight': '100%' }}>
+          <div className="ui inverted vertical masthead center aligned segment" style={{'background': 'linear-gradient(rgba(0, 40, 0, .6), rgba(0, 0, 0, .3)), url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover'}}>
+
+              <div className="ui container">
+                <div className="ui large secondary inverted pointing menu">
+                  <a className="toc item" onClick={this.toggleSidebarVisibility}>
+                    <i className="sidebar icon"></i>
+                  </a>
                 </div>
               </div>
-            </div>
 
-            <div className="ui text container">
-              <h1 className="ui inverted header">
-                I Want Someone To Scream...
-              </h1>
-              <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={this.state.placeholder} value={this.state.scream}/>
-              <br/>
-              <div className="ui huge primary button myButton" onClick={(e)=>this.submitForm()}>Go <i className="right arrow icon"></i></div>
+              <div className="ui text container">
+                <h1 className="ui inverted header">
+                  I Want Someone To Scream...
+                </h1>
+                <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={this.state.placeholder} value={this.state.scream}/>
+                <br/>
+                <div className="ui huge primary button myButton" onClick={(e)=>this.submitForm()}>Go <i className="right arrow icon"></i></div>
+              </div>
             </div>
+        </div>
+      </Sidebar.Pusher>
+    </Sidebar.Pushable>
 
-          </div>
-        {/*<Container text>
-            <div className="logoContainer">
-              <Segment inverted circular color='yellow' className='logo'><Header as='h1'>ECHO</Header></Segment>
-            </div>
-
-            <div className="mainContent">
-              <Segment padded='very' attached>
-                <p>Text this number</p>
-                  <a href="tel:+18058641118">
-                  <Button basic size='massive' color='blue'>
-                    <Icon name='phone' /> +1 (805) 864-1118
-                  </Button>
-                </a>
-              </Segment>
-              <Message warning attached='bottom'>
-                <Icon name='warning' />
-                Only for the brave
-              </Message>
-            </div>
-
-        </Container>*/}
-      </div>
     );
   }
 }
