@@ -11,14 +11,12 @@ let placeholders = [
 class App extends Component {
   constructor() {
     super()
-    let page = window.location.hash ? window.location.hash.substring(1): 'home'
     this.state = {
       placeholder: '',
       isFetching: false,
       response: '',
       scream:'',
-      sidebarVisible: false,
-      page    
+      sidebarVisible: false   
     }
 
     this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
@@ -78,8 +76,9 @@ class App extends Component {
   }
 
   render() {
-    let {placeholder, scream, page, sidebarVisible } = this.state;
+    let {placeholder, scream, sidebarVisible } = this.state;
     let content;
+    let page = window.location.hash ? window.location.hash.substring(1): 'home'
 
     let Home =(
       <div className="ui text container" >
