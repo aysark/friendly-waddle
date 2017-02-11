@@ -179,8 +179,6 @@ class App extends Component {
 
                   <div className="ui container">
                     <Button floated='left' basic inverted icon='sidebar' onClick={this.toggleSidebarVisibility} />
-                      <Image floated='right' basic inverted color='white' className='logo' src={logo}/>
-                    </Button>
                     <Image floated='right' basic inverted color='white' className='logo' src={logo}/>
                   </div>
                   {content}
