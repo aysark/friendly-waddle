@@ -11,14 +11,12 @@ let placeholders = [
 class App extends Component {
   constructor() {
     super()
-    let page = window.location.hash ? window.location.hash.substring(1): 'home'
     this.state = {
       placeholder: '',
       isFetching: false,
       response: '',
       scream:'',
-      sidebarVisible: false,
-      page
+      sidebarVisible: false
     }
 
     this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
@@ -36,6 +34,11 @@ class App extends Component {
     }, 3500);
   }
 
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.submitForm()
+    }
+  }
   changeText(newText){
     let oldText = this.state.placeholder,
         length = this.state.placeholder.length,
@@ -78,15 +81,16 @@ class App extends Component {
   }
 
   render() {
-    let {placeholder, scream, page, sidebarVisible } = this.state;
+    let {placeholder, scream, sidebarVisible } = this.state;
     let content;
+    let page = window.location.hash ? window.location.hash.substring(1): 'home'
 
     let Home =(
       <div className="ui text container" >
         <h1 className="ui inverted header">
           I Want Someone To Scream...
         </h1>
-        <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={this.state.placeholder} value={this.state.scream}/>
+        <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={placeholder} value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
         <br/>
         <div className="ui huge primary button myButton" onClick={(e)=>this.submitForm()}>Go <i className="right arrow icon"></i></div>
       </div>
@@ -131,10 +135,10 @@ class App extends Component {
         <Menu.Item name='home' onClick={ (e)=> {this.setState({page:'home'}); window.location.hash='home'} } className={ page==='home' ? 'active item': 'item' }>
           Home
         </Menu.Item>
-        <Menu.Item name='FAQ' onClick={ (e)=> {this.setState({page:'faq'}); window.location.hash='faq'} } className={ page==='faq' ? 'active item': 'item' }>
+        <Menu.Item name='FAQ' onClick={ (e)=> {this.setState({page: 'faq'}); window.location.hash='faq'} } className={ page==='faq' ? 'active item': 'item' }>
           FAQ
         </Menu.Item>
-        <Menu.Item name='About' onClick={ (e)=> {this.setState({page:'about'}); window.location.hash='about'} } className={ page==='about' ? 'active item': 'item' }>
+        <Menu.Item name='About' onClick={ (e)=> {this.setState({page: 'about'}); window.location.hash='about'} } className={ page==='about' ? 'active item': 'item' }>
           About Us
         </Menu.Item>
         <Menu.Menu position='right'>
