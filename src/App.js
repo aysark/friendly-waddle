@@ -11,13 +11,14 @@ let placeholders = [
 class App extends Component {
   constructor() {
     super()
+    let page = window.location.hash ? window.location.hash.substring(1): 'home'
     this.state = {
       placeholder: '',
       isFetching: false,
       response: '',
       scream:'',
       sidebarVisible: false,
-      page: 'home'
+      page    
     }
 
     this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
@@ -113,27 +114,27 @@ class App extends Component {
     )
 
     switch(page){
-      case 'home':
-        content = Home
-        break;
       case 'faq':
         content = FAQ
         break;
       case 'about':
         content = About
         break;
+      default:
+        content = Home
+        break;
     }
 
     return (
       <Sidebar.Pushable >
       <Sidebar as={Menu} animation='push' direction='top' visible={sidebarVisible} inverted>
-        <Menu.Item name='home' onClick={ (e)=> this.setState({page:'home'}) } className={ page==='home' ? 'active item': 'item' }>
+        <Menu.Item name='home' onClick={ (e)=> {this.setState({page:'home'}); window.location.hash='home'} } className={ page==='home' ? 'active item': 'item' }>
           Home
         </Menu.Item>
-        <Menu.Item name='FAQ' onClick={ (e)=> this.setState({page:'faq'}) } className={ page==='faq' ? 'active item': 'item' }>
+        <Menu.Item name='FAQ' onClick={ (e)=> {this.setState({page:'faq'}); window.location.hash='faq'} } className={ page==='faq' ? 'active item': 'item' }>
           FAQ
         </Menu.Item>
-        <Menu.Item name='About' onClick={ (e)=> this.setState({page:'about'}) } className={ page==='about' ? 'active item': 'item' }>
+        <Menu.Item name='About' onClick={ (e)=> {this.setState({page:'about'}); window.location.hash='about'} } className={ page==='about' ? 'active item': 'item' }>
           About Us
         </Menu.Item>
       </Sidebar>
