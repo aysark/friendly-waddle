@@ -34,6 +34,11 @@ class App extends Component {
     }, 3500);
   }
 
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.submitForm()
+    }
+  }
   changeText(newText){
     let oldText = this.state.placeholder,
         length = this.state.placeholder.length,
@@ -85,7 +90,7 @@ class App extends Component {
         <h1 className="ui inverted header">
           I Want Someone To Scream...
         </h1>
-        <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={this.state.placeholder} value={this.state.scream}/>
+        <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={this.state.placeholder} value={this.state.scream} onKeyPress={this.handleKeyPress.bind(this)}/>
         <br/>
         <div className="ui huge primary button myButton" onClick={(e)=>this.submitForm()}>Go <i className="right arrow icon"></i></div>
       </div>
