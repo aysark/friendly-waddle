@@ -148,11 +148,7 @@ class App extends Component {
           <div className="ui inverted vertical masthead center aligned segment" style={{ 'background': 'transparent'}}>
 
               <div className="ui container">
-                <div className="ui large secondary inverted pointing menu">
-                  <a className="toc item" onClick={this.toggleSidebarVisibility}>
-                    <i className="sidebar icon"></i>
-                  </a>
-                </div>
+                <Button floated='left' basic inverted color='white' icon='sidebar' onClick={this.toggleSidebarVisibility} />
               </div>
               {content}
 
