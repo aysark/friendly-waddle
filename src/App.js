@@ -178,7 +178,7 @@ class App extends Component {
               <div className="ui inverted vertical masthead center aligned segment" style={{ 'background': 'transparent'}}>
 
                   <div className="ui container">
-                    <Button floated='left' basic inverted color='white' onClick={this.toggleSidebarVisibility}>
+                    <Button floated='left' basic inverted icon='sidebar' onClick={this.toggleSidebarVisibility} />
                       <Image floated='right' basic inverted color='white' className='logo' src={logo}/>
                     </Button>
                     <Image floated='right' basic inverted color='white' className='logo' src={logo}/>
