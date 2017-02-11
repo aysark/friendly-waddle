@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Container, Icon, Label, Message, Header, Segment, Button } from 'semantic-ui-react'
 import './App.css';
 
 class App extends Component {
   render() {
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Container text>
+            <div className="logoContainer">
+              <Segment inverted circular color='yellow' className='logo'><Header as='h1'>ECHO</Header></Segment>
+            </div>
+
+            <div className="mainContent">
+              <Segment padded='very' attached>
+                <p>Text this number</p>
+                  <a href="tel:+18058641118">
+                  <Button basic size='massive' color='blue'>
+                    <Icon name='phone' /> +1 (805) 864-1118
+                  </Button>
+                </a>
+              </Segment>
+              <Message warning attached='bottom'>
+                <Icon name='warning' />
+                Only for the brave
+              </Message>
+            </div>
+
+        </Container>
       </div>
     );
   }
