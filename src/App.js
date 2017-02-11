@@ -5,9 +5,13 @@ import StripeCheckout from 'react-stripe-checkout';
 
 
 let placeholders = [
-  'I Love Startup Weekend',
-  'Buy Ray\'s Pizza',
-  'Echo.Cash is the Best'
+  //'I Love Startup Weekend',
+  //'Five dollars is a steal',
+  'I fucked a turtle',
+  'I fucked a cactus',
+  'I fucked a walrus',
+  'I fucked a nSync Member',
+  //'Echo.Cash is the Best'
 ];
 
 class App extends Component {
@@ -24,18 +28,20 @@ class App extends Component {
     this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
   }
   onToken(token){
-    fetch('/save-stripe-token', {
+    let message = this.state.scream;
+    fetch('https://7wdf6kg40i.execute-api.us-east-1.amazonaws.com/dev/dares', {
       method: 'POST',
-      body: JSON.stringify(token),
+      body: JSON.stringify({token, message}),
     }).then(response => {
       response.json().then(data => {
-        alert(`We are in business, ${data.email}`);
+        alert(`We are in business, ${data}`);
       });
     });
   }
 
   componentWillMount(){
-    let currentIndex = 0
+
+    let currentIndex = Math.floor(Math.random() * placeholders.length)
     this.changeText.call(this, placeholders[currentIndex]);
     let intervalID = setInterval(()=>{
         ++currentIndex;
@@ -43,7 +49,7 @@ class App extends Component {
             currentIndex = 0;
         }
         this.changeText.call(this, placeholders[currentIndex]);   // set new news item into the ticker
-    }, 3500);
+    }, 4000);
   }
 
   handleKeyPress(e) {
@@ -56,10 +62,10 @@ class App extends Component {
         length = this.state.placeholder.length,
         newLength = newText.length;
     let erase= (i)=>{
-      setTimeout(()=>{this.setState({placeholder:oldText.substring(0, length - i - 1)})}, i*40)
+      setTimeout(()=>{this.setState({placeholder:oldText.substring(0, length - i - 1)})}, i*25)
     }
     let write= (i)=>{
-      setTimeout(()=>{this.setState({placeholder:newText.substring(0, i)})}, (i*40+ length*40))
+      setTimeout(()=>{this.setState({placeholder:newText.substring(0, i)})}, (i*40+ length*25 + 300))
     }
     for(let i=0; i< length; i++){
       erase(i)
@@ -79,8 +85,15 @@ class App extends Component {
   }
 
   submitForm(){
-
     let scream = this.state.scream;
+    fetch('https://7wdf6kg40i.execute-api.us-east-1.amazonaws.com/dev/dares', {
+      method: 'POST',
+      body: JSON.stringify({scream: scream}),
+    }).then(response => {
+      response.json().then(data => {
+        alert(`We are in business, ${data.email}`);
+      });
+    });
     //insert Shervins Code
 
   }
@@ -104,12 +117,15 @@ class App extends Component {
         <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={placeholder} value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
         <br/>
         <StripeCheckout
-          token={this.onToken}
+          token={(e)=>this.onToken(e)}
+          name="Someone will Scream"
+          description={`"${scream}"`}
+          image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
           stripeKey="pk_test_nt3P9BYP9u27czpLf2IJZyGs"
           amount={500}
           panelLabel={`Submit Your Echo`}
           >
-          <div className="ui huge primary button myButton" onClick={(e)=>this.submitForm()}>Pay $5 <i className="right arrow icon"></i></div>
+          <div className="ui huge primary button myButton">Go!</div>
         </StripeCheckout>
       </div>
     )
@@ -162,7 +178,7 @@ class App extends Component {
         </Sidebar>
         <Sidebar.Pusher>
           <div className="App" style={{'background': 'url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
-            <div className="App" style={{'background': 'linear-gradient(rgba(0,0,0,.5), rgba(0,100,0,.7))', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
+            <div className="App" style={{'background': 'linear-gradient(to bottom right, #21b9de, rgba(  33, 185, 222,.95), rgba(169, 90, 230,.95), #a95ae6)', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
               <div className="ui inverted vertical masthead center aligned segment" style={{ 'background': 'transparent'}}>
 
                   <div className="ui container">
@@ -172,6 +188,7 @@ class App extends Component {
 
               </div>
             </div>
+            <div className="ui huge primary button myButton">Go!</div>
           </div>
         </Sidebar.Pusher>
       </Sidebar.Pushable>

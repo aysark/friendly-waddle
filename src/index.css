@@ -3,6 +3,9 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+*{
+  font-family: 'Roboto', sans-serif;
+}
 
 .masthead.segment {
   min-height: 700px;
@@ -19,6 +22,8 @@ body {
   margin-bottom: 0em;
   font-size: 4em;
   font-weight: normal;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
 }
 .masthead h2 {
   font-size: 1.7em;
@@ -26,26 +31,34 @@ body {
 }
 
 input.myBox {
-    border: 0px solid #FFF;
-    border-bottom-width: 1px;
+    border: 1px solid #FFF;
+    border-radius: 25px;
     background-color: transparent;
     color: #FFF;
-    font-size: 3em;
+    font-size: 2.5em;
     padding: .2em;
+    width: 100%;
     text-align: center;
-
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
 
 }
 input.myBox::-webkit-input-placeholder {
     color:#fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
 }
 input.myBox:focus::-webkit-input-placeholder {
     color:rgba(0,0,0,0);
 }
 
 .ui.primary.button.myButton {
+  font-family: 'Roboto', sans-serif;
   float: right;
-  margin-right: 5em;
+  margin-right: 2em;
   margin-top: 1em;
-  background-color: #272
+  padding:10px 10px;
+  color: #a95ae6;
+  background-color: #FFF;
+  border-radius: 30px;
 }
