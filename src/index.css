@@ -64,3 +64,7 @@ input.myBox:focus::-webkit-input-placeholder {
   background-color: #FFF;
   border-radius: 30px;
 }
+.logo{
+  width:150px;
+  top: -50px;
+}
