@@ -16,7 +16,8 @@ class App extends Component {
       isFetching: false,
       response: '',
       scream:'',
-      sidebarVisible: false
+      sidebarVisible: false,
+      page: 'home'
     }
 
     this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
@@ -24,7 +25,7 @@ class App extends Component {
 
   componentWillMount(){
     let currentIndex = 0
-    this.setState({placeholder: placeholders[currentIndex]});
+    this.changeText.call(this, placeholders[currentIndex]);
     let intervalID = setInterval(()=>{
         ++currentIndex;
         if (currentIndex >= placeholders.length) {
@@ -76,25 +77,70 @@ class App extends Component {
   }
 
   render() {
-    const visible = this.state.sidebarVisible;
+    let {placeholder, scream, page, sidebarVisible } = this.state;
+    let content;
+
+    let Home =(
+      <div className="ui text container" >
+        <h1 className="ui inverted header">
+          I Want Someone To Scream...
+        </h1>
+        <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={this.state.placeholder} value={this.state.scream}/>
+        <br/>
+        <div className="ui huge primary button myButton" onClick={(e)=>this.submitForm()}>Go <i className="right arrow icon"></i></div>
+      </div>
+    )
+
+    let FAQ =(
+      <div className="ui text container" >
+        <h1 className="ui inverted header">
+         FAQ
+        </h1>
+        <h2> What is Echo.cash? </h2>
+        <p> Really Amazing</p>
+      </div>
+    )
+
+    let About =(
+      <div className="ui text container" >
+        <h1 className="ui inverted header">
+         About Us
+        </h1>
+        <p>
+          We are the coolest site. We Started at Startup Weekend Orange County
+        </p>
+      </div>
+    )
+
+    switch(page){
+      case 'home':
+        content = Home
+        break;
+      case 'faq':
+        content = FAQ
+        break;
+      case 'about':
+        content = About
+        break;
+    }
 
     return (
-
       <Sidebar.Pushable >
-      <Sidebar as={Menu} animation='push' direction='top' visible={visible} inverted>
-        <Menu.Item name='home'>
-          <a href="http://localhost:3000/">Home</a>
+      <Sidebar as={Menu} animation='push' direction='top' visible={sidebarVisible} inverted>
+        <Menu.Item name='home' onClick={ (e)=> this.setState({page:'home'}) } className={ page==='home' ? 'active item': 'item' }>
+          Home
         </Menu.Item>
-        <Menu.Item name='FAQ'>
+        <Menu.Item name='FAQ' onClick={ (e)=> this.setState({page:'faq'}) } className={ page==='faq' ? 'active item': 'item' }>
           FAQ
         </Menu.Item>
-        <Menu.Item name='About'>
-          About
+        <Menu.Item name='About' onClick={ (e)=> this.setState({page:'about'}) } className={ page==='about' ? 'active item': 'item' }>
+          About Us
         </Menu.Item>
       </Sidebar>
       <Sidebar.Pusher>
-        <div className="App" style={{'background': 'linear-gradient(rgba(0, 40, 0, .6), rgba(0, 0, 0, .3)), url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover', 'minHeight': '100%' }}>
-          <div className="ui inverted vertical masthead center aligned segment" style={{'background': 'linear-gradient(rgba(0, 40, 0, .6), rgba(0, 0, 0, .3)), url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover'}}>
+      <div className="App" style={{'background': 'url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
+        <div className="App" style={{'background': 'linear-gradient(rgba(0,0,0,.5), rgba(0,100,0,.7))', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
+          <div className="ui inverted vertical masthead center aligned segment" style={{ 'background': 'transparent'}}>
 
               <div className="ui container">
                 <div className="ui large secondary inverted pointing menu">
@@ -103,20 +149,13 @@ class App extends Component {
                   </a>
                 </div>
               </div>
+              {content}
 
-              <div className="ui text container">
-                <h1 className="ui inverted header">
-                  I Want Someone To Scream...
-                </h1>
-                <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={this.state.placeholder} value={this.state.scream}/>
-                <br/>
-                <div className="ui huge primary button myButton" onClick={(e)=>this.submitForm()}>Go <i className="right arrow icon"></i></div>
-              </div>
-            </div>
+          </div>
         </div>
-      </Sidebar.Pusher>
-    </Sidebar.Pushable>
-
+      </div>
+    </Sidebar.Pusher>
+  </Sidebar.Pushable>
     );
   }
 }

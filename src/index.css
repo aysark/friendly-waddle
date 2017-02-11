@@ -39,6 +39,9 @@ input.myBox {
 input.myBox::-webkit-input-placeholder {
     color:#fff;
 }
+input.myBox:focus::-webkit-input-placeholder {
+    color:rgba(0,0,0,0);
+}
 
 .ui.primary.button.myButton {
   float: right;
