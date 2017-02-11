@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Icon, Label, Message, Header, Segment, Button, Sidebar, Menu, Image } from 'semantic-ui-react'
+import { Container, Icon, Label, Message, Header, Segment, Button, Sidebar, Menu, Image, Modal } from 'semantic-ui-react'
 import './App.css';
+import StripeCheckout from 'react-stripe-checkout';
+
 
 let placeholders = [
   'I Love Startup Weekend',
@@ -20,6 +22,16 @@ class App extends Component {
     }
 
     this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
+  }
+  onToken(token){
+    fetch('/save-stripe-token', {
+      method: 'POST',
+      body: JSON.stringify(token),
+    }).then(response => {
+      response.json().then(data => {
+        alert(`We are in business, ${data.email}`);
+      });
+    });
   }
 
   componentWillMount(){
@@ -70,7 +82,6 @@ class App extends Component {
 
     let scream = this.state.scream;
     //insert Shervins Code
-    alert(scream)
 
   }
 
@@ -92,7 +103,14 @@ class App extends Component {
         </h1>
         <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={placeholder} value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
         <br/>
-        <div className="ui huge primary button myButton" onClick={(e)=>this.submitForm()}>Go <i className="right arrow icon"></i></div>
+        <StripeCheckout
+          token={this.onToken}
+          stripeKey="pk_test_nt3P9BYP9u27czpLf2IJZyGs"
+          amount={500}
+          panelLabel={`Submit Your Echo`}
+          >
+          <div className="ui huge primary button myButton" onClick={(e)=>this.submitForm()}>Pay $5 <i className="right arrow icon"></i></div>
+        </StripeCheckout>
       </div>
     )
 
@@ -131,32 +149,32 @@ class App extends Component {
 
     return (
       <Sidebar.Pushable >
-      <Sidebar as={Menu} animation='push' direction='top' visible={sidebarVisible} inverted>
-        <Menu.Item name='home' onClick={ (e)=> {this.setState({page: 'home'}); window.location.hash='home'} } className={ page==='home' ? 'active item': 'item' }>
-          Home
-        </Menu.Item>
-        <Menu.Item name='FAQ' onClick={ (e)=> {this.setState({page: 'faq'}); window.location.hash='faq'} } className={ page==='faq' ? 'active item': 'item' }>
-          FAQ
-        </Menu.Item>
-        <Menu.Item name='About' onClick={ (e)=> {this.setState({page: 'about'}); window.location.hash='about'} } className={ page==='about' ? 'active item': 'item' }>
-          About Us
-        </Menu.Item>
-      </Sidebar>
-      <Sidebar.Pusher>
-      <div className="App" style={{'background': 'url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
-        <div className="App" style={{'background': 'linear-gradient(rgba(0,0,0,.5), rgba(0,100,0,.7))', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
-          <div className="ui inverted vertical masthead center aligned segment" style={{ 'background': 'transparent'}}>
+        <Sidebar as={Menu} animation='push' direction='top' visible={sidebarVisible} inverted>
+          <Menu.Item name='home' onClick={ (e)=> {this.setState({page: 'home'}); window.location.hash='home'} } className={ page==='home' ? 'active item': 'item' }>
+            Home
+          </Menu.Item>
+          <Menu.Item name='FAQ' onClick={ (e)=> {this.setState({page: 'faq'}); window.location.hash='faq'} } className={ page==='faq' ? 'active item': 'item' }>
+            FAQ
+          </Menu.Item>
+          <Menu.Item name='About' onClick={ (e)=> {this.setState({page: 'about'}); window.location.hash='about'} } className={ page==='about' ? 'active item': 'item' }>
+            About Us
+          </Menu.Item>
+        </Sidebar>
+        <Sidebar.Pusher>
+          <div className="App" style={{'background': 'url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
+            <div className="App" style={{'background': 'linear-gradient(rgba(0,0,0,.5), rgba(0,100,0,.7))', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
+              <div className="ui inverted vertical masthead center aligned segment" style={{ 'background': 'transparent'}}>
 
-              <div className="ui container">
-                <Button floated='left' basic inverted color='white' icon='sidebar' onClick={this.toggleSidebarVisibility} />
+                  <div className="ui container">
+                    <Button floated='left' basic inverted color='white' icon='sidebar' onClick={this.toggleSidebarVisibility} />
+                  </div>
+                  {content}
+
               </div>
-              {content}
-
+            </div>
           </div>
-        </div>
-      </div>
-    </Sidebar.Pusher>
-  </Sidebar.Pushable>
+        </Sidebar.Pusher>
+      </Sidebar.Pushable>
     );
   }
 }
