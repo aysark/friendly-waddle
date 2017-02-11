@@ -18,7 +18,7 @@ class App extends Component {
       isFetching: false,
       response: '',
       scream:'',
-      sidebarVisible: false   
+      sidebarVisible: false
     }
 
     this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
@@ -181,7 +181,6 @@ class App extends Component {
                     <Button floated='left' basic inverted color='white' icon='sidebar' onClick={this.toggleSidebarVisibility} />
                   </div>
                   {content}
-
               </div>
             </div>
           </div>
