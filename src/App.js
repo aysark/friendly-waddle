@@ -5,13 +5,9 @@ import StripeCheckout from 'react-stripe-checkout';
 
 
 let placeholders = [
-  //'I Love Startup Weekend',
-  //'Five dollars is a steal',
-  'I fucked a turtle',
-  'I fucked a cactus',
-  'I fucked a walrus',
-  'I fucked a nSync Member',
-  //'Echo.Cash is the Best'
+  'I Love Startup Weekend',
+  'Five dollars is a steal',
+  'Echo.Cash is the Best'
 ];
 
 class App extends Component {
@@ -114,7 +110,7 @@ class App extends Component {
         <h1 className="ui inverted header">
           I Want Someone To Scream...
         </h1>
-        <input className="myBox" onChange={(e)=> this.changeScream(e)}placeholder={placeholder} value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
+        <input className="myBox" onChange={(e)=> this.changeScream(e)} placeholder={ placeholder } value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
         <br/>
         <StripeCheckout
           token={(e)=>this.onToken(e)}
@@ -178,7 +174,7 @@ class App extends Component {
         </Sidebar>
         <Sidebar.Pusher>
           <div className="App" style={{'background': 'url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
-            <div className="App" style={{'background': 'linear-gradient(to bottom right, #21b9de, rgba(  33, 185, 222,.95), rgba(169, 90, 230,.95), #a95ae6)', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
+            <div className="App" style={{'background': 'linear-gradient(to bottom right, rgba(  33, 185, 222,.95), rgba(169, 90, 230,.95))', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
               <div className="ui inverted vertical masthead center aligned segment" style={{ 'background': 'transparent'}}>
 
                   <div className="ui container">
@@ -188,7 +184,6 @@ class App extends Component {
 
               </div>
             </div>
-            <div className="ui huge primary button myButton">Go!</div>
           </div>
         </Sidebar.Pusher>
       </Sidebar.Pushable>
