@@ -1,6 +1,10 @@
 .App {
   text-align: center;
   margin-top: 10px;
+  min-height: 100%;
+}
+html, body {
+    background-color: #000;
 }
 
 .mainContent {
