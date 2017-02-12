@@ -28,10 +28,11 @@ class App extends Component {
     this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
   }
   onToken(token){
-    let message = this.state.scream;
+    let message = this.state.scream,
+      status = 'new';
     fetch('https://7wdf6kg40i.execute-api.us-east-1.amazonaws.com/dev/dares', {
       method: 'POST',
-      body: JSON.stringify({token, message}),
+      body: JSON.stringify({token, message, status}),
     }).then(response => {
       response.json().then(data => {
         this.setState({messageSubmitted: true})
