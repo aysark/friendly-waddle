@@ -132,7 +132,7 @@ class App extends Component {
           <h1 className="ui inverted header">
             I Want Someone To Scream
           </h1>
-          <h2 style={{'fontFamily': 'Roboto'}}>{ placeholder || '...' }</h2>
+          <h2 style={{'fontFamily': 'Roboto'}}>{ placeholder + '...' }</h2>
           <input className="myBox" onChange={(e)=> this.changeScream(e)} value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
           <br/>
           <StripeCheckout
