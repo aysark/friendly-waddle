@@ -64,7 +64,7 @@ class App extends Component {
 
   handleKeyPress(e) {
     if (e.key === 'Enter') {
-      this.submitForm()
+      document.getElementById('howdyButton').click()
     }
   }
   changeText(newText){
@@ -130,9 +130,10 @@ class App extends Component {
       main = (
         <div>
           <h1 className="ui inverted header">
-            I Want Someone To Scream...
+            I Want Someone To Scream
           </h1>
-          <input className="myBox" onChange={(e)=> this.changeScream(e)} placeholder={ placeholder + '...' } value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
+          <h2 style={{'fontFamily': 'Roboto'}}>{ placeholder || '...' }</h2>
+          <input className="myBox" onChange={(e)=> this.changeScream(e)} value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
           <br/>
           <StripeCheckout
             token={(e)=>this.onToken(e)}
@@ -143,7 +144,7 @@ class App extends Component {
             amount={500}
             panelLabel={`Submit Your Echo`}
             >
-            <div className="ui huge primary button myButton">Go!</div>
+            <div className="ui huge primary button myButton" id='howdyButton'>Go!</div>
           </StripeCheckout>
         </div>
       )
@@ -233,7 +234,7 @@ class App extends Component {
 
                   <div className="ui container">
                     <Image floated='left' basic inverted color='white' id='myMenu' src={menu} onClick={this.toggleSidebarVisibility}/>
-                    <Image floated='right' basic inverted color='white' className='logo' src={logo}/>
+                    <Image floated='right' basic inverted color='white' className='logo' onClick={ (e)=> {this.setState({page: 'home'}); window.location.hash='home'} } src={logo}/>
                   </div>
                   {content}
               </div>
