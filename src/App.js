@@ -4,6 +4,7 @@ import './App.css';
 import StripeCheckout from 'react-stripe-checkout';
 import logo from './Echo_logo.svg';
 import menu from './menu.svg';
+import cubes from './cubes.png';
 
 let placeholders = [
   'I Love Startup Weekend',
@@ -132,8 +133,20 @@ class App extends Component {
         <h1 className="ui inverted header">
          FAQ
         </h1>
-        <h2> What is Echo.cash? </h2>
-        <p> Really Amazing</p>
+        <h2>What is Echo.cash?</h2>
+        <p>Really Amazing. Echoee’s pay echoers to say anything they want.</p>
+        <h2>How do I create an account?</h2>
+        <p>Simple, just log in with your Facebook account. </p>
+        <h2>Is this a scam?</h2>
+        <p>No! All of your purchases are guaranteed. If no one accepts your challenge within 24 hours, your money is refunded.</p>
+        <h2>How do I pay?</h2>
+        <p>Through Venmo, Pay-Pal, or by entering your credit card information.</p>
+        <h2>How do I accept challenges?</h2>
+        <p>You can only accept one challenge per 24 hours. Click on the challenge you want to do and click accept. You must post the video to your Facebook and use the custom hashtag created for your video. You will be paid once it is confirmed by our review team that you have successfully completed the challenge according to our guidelines. You will be paid by Venmo. Payments are typically processed between 1 to 2 business days.</p>
+        <h2>How do I create challenges?</h2>
+        <p>Type in the character box “I want someone to scream” …. And then use 140 characters to type in what you want someone to scream. Once finished you will be prompted to pay for your challenge. Once your money is accepted your challenge will be posted to the open challenges page. Once someone accepts your challenge and posts their video you will receive a link with their video, as well as a custom hashtag that you can use to look up the video.  </p>
+        <h2>How do you get paid?</h2>
+        <p>We take a small percentage for every echo.</p>
       </div>
     )
 
@@ -142,9 +155,9 @@ class App extends Component {
         <h1 className="ui inverted header">
          About Us
         </h1>
-        <p>
-          We are the coolest site. We Started at Startup Weekend Orange County
-        </p>
+        <h2>Echo is unique tech company at Startup Weekend Orange County. We are a cool group of developers, marketers, and designers</h2>
+        <h1 className="ui inverted header"> How it works </h1>
+        <h2>It’s simple!<br/>In 120 characters, you dare your friends or strangers to scream something ridiculous for $5.</h2>
       </div>
     )
 
@@ -174,7 +187,7 @@ class App extends Component {
           </Menu.Item>
         </Sidebar>
         <Sidebar.Pusher>
-          <div className="App" style={{'background': 'url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
+          <div className="App" style={{'background': `url(http://cdn2.collective-evolution.com/assets/uploads/2016/08/yelling.jpg)`, 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
             <div className="App" style={{'background': 'linear-gradient(to bottom right, rgba(  33, 185, 222,.95), rgba(169, 90, 230,.95))', 'backgroundSize': 'cover', 'minHeight': '100vh' }}>
               <div className="ui inverted vertical masthead center aligned segment" style={{ 'background': 'transparent'}}>
 
