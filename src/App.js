@@ -21,6 +21,7 @@ class App extends Component {
       response: '',
       scream:'',
       sidebarVisible: false,
+      messageSubmitted: false,
       list: []
     }
 
@@ -33,7 +34,7 @@ class App extends Component {
       body: JSON.stringify({token, message}),
     }).then(response => {
       response.json().then(data => {
-        alert(`We are in business, ${data}`);
+        this.setState({messageSubmitted: true})
       });
     });
   }
@@ -113,8 +114,8 @@ class App extends Component {
   }
 
   render() {
-    let {placeholder, scream, sidebarVisible, list, isFetching } = this.state;
-    let content, listed;
+    let {placeholder, scream, sidebarVisible, list, isFetching, messageSubmitted } = this.state;
+    let content, listed, main;
     let page = window.location.hash ? window.location.hash.substring(1): 'home'
 
     if(isFetching){
@@ -124,24 +125,42 @@ class App extends Component {
         return <h2> {item.message} </h2>
       })
     }
+    if(!messageSubmitted){
+      main = (
+        <div>
+          <h1 className="ui inverted header">
+            I Want Someone To Scream...
+          </h1>
+          <input className="myBox" onChange={(e)=> this.changeScream(e)} placeholder={ placeholder + '...' } value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
+          <br/>
+          <StripeCheckout
+            token={(e)=>this.onToken(e)}
+            name="Someone will Scream"
+            description={`"${scream}"`}
+            image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
+            stripeKey="pk_0B7NRwJD0FIN4X3c6hpXm8xRMrYCo"
+            amount={500}
+            panelLabel={`Submit Your Echo`}
+            >
+            <div className="ui huge primary button myButton">Go!</div>
+          </StripeCheckout>
+        </div>
+      )
+    } else {
+      main = (
+        <div>
+          <h1 className="ui inverted header">
+            Thank you, someone is going to scream. 
+          </h1>
+          <h1 className="ui inverted header">
+            {scream} 
+          </h1>
+        </div>
+      )
+    }
     let Home =(
       <div className="ui text container" >
-        <h1 className="ui inverted header">
-          I Want Someone To Scream...
-        </h1>
-        <input className="myBox" onChange={(e)=> this.changeScream(e)} placeholder={ placeholder + '...' } value={scream} onKeyPress={this.handleKeyPress.bind(this)}/>
-        <br/>
-        <StripeCheckout
-          token={(e)=>this.onToken(e)}
-          name="Someone will Scream"
-          description={`"${scream}"`}
-          image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
-          stripeKey="pk_0B7NRwJD0FIN4X3c6hpXm8xRMrYCo"
-          amount={500}
-          panelLabel={`Submit Your Echo`}
-          >
-          <div className="ui huge primary button myButton">Go!</div>
-        </StripeCheckout>
+        { main }
 
         <h1 className="ui inverted header"> Current Messages</h1>
         { listed }
