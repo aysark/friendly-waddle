@@ -17,10 +17,11 @@ class App extends Component {
     super()
     this.state = {
       placeholder: '',
-      isFetching: false,
+      isFetching: true,
       response: '',
       scream:'',
-      sidebarVisible: false
+      sidebarVisible: false,
+      list: []
     }
 
     this.toggleSidebarVisibility = this.toggleSidebarVisibility.bind(this);
@@ -48,6 +49,15 @@ class App extends Component {
         }
         this.changeText.call(this, placeholders[currentIndex]);   // set new news item into the ticker
     }, 4000);
+
+    fetch('https://7wdf6kg40i.execute-api.us-east-1.amazonaws.com/dev/dares').then(response => {
+      response.json().then(data => {
+        this.setState({
+          isFetching: false,
+          list: data
+        })
+      });
+    });
   }
 
   handleKeyPress(e) {
@@ -103,10 +113,17 @@ class App extends Component {
   }
 
   render() {
-    let {placeholder, scream, sidebarVisible } = this.state;
-    let content;
+    let {placeholder, scream, sidebarVisible, list, isFetching } = this.state;
+    let content, listed;
     let page = window.location.hash ? window.location.hash.substring(1): 'home'
 
+    if(isFetching){
+      listed = <h2> Loading </h2>
+    } else {
+      listed = list.map((item)=>{
+        return <h2> {item.message} </h2>
+      })
+    }
     let Home =(
       <div className="ui text container" >
         <h1 className="ui inverted header">
@@ -125,6 +142,9 @@ class App extends Component {
           >
           <div className="ui huge primary button myButton">Go!</div>
         </StripeCheckout>
+
+        <h1 className="ui inverted header"> Current Messages</h1>
+        { listed }
       </div>
     )
 
