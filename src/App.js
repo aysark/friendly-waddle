@@ -3,6 +3,7 @@ import { Container, Icon, Label, Message, Header, Segment, Button, Sidebar, Menu
 import './App.css';
 import StripeCheckout from 'react-stripe-checkout';
 import logo from './Echo_logo.svg';
+import menu from './menu.svg';
 
 let placeholders = [
   'I Love Startup Weekend',
@@ -178,7 +179,9 @@ class App extends Component {
               <div className="ui inverted vertical masthead center aligned segment" style={{ 'background': 'transparent'}}>
 
                   <div className="ui container">
-                    <Button floated='left' basic inverted icon='sidebar' onClick={this.toggleSidebarVisibility} />
+                    <Button floated='left' basic inverted icon='sidebar' onClick={this.toggleSidebarVisibility} >
+                      <Image floated='right' basic inverted color='white' id='myMenu' src={menu}/>
+                    </Button>
                     <Image floated='right' basic inverted color='white' className='logo' src={logo}/>
                   </div>
                   {content}
