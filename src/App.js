@@ -121,7 +121,7 @@ class App extends Component {
           name="Someone will Scream"
           description={`"${scream}"`}
           image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png"
-          stripeKey="pk_test_nt3P9BYP9u27czpLf2IJZyGs"
+          stripeKey="pk_0B7NRwJD0FIN4X3c6hpXm8xRMrYCo"
           amount={500}
           panelLabel={`Submit Your Echo`}
           >
